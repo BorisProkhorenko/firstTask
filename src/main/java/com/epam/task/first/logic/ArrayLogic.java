@@ -2,20 +2,13 @@ package com.epam.task.first.logic;
 
 import com.epam.task.first.entity.Array;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ArrayLogic {
-    private Array array;
 
-    public ArrayLogic(Array array) {
-        this.array = array;
-    }
 
-    public int findMax() {
-        ArrayList<Integer> elements = array.getElements();
-        if (elements.size() == 0) {
-            throw new IndexOutOfBoundsException("Empty array");
-        }
+    public int findMax(Array array) {
+        List<Integer> elements = array.getElements();
         int max = elements.get(0);
         for (int element : elements) {
             if (max < element) {
@@ -25,11 +18,8 @@ public class ArrayLogic {
         return max;
     }
 
-    public int findMin() {
-        ArrayList<Integer> elements = array.getElements();
-        if (elements.size() == 0) {
-            throw new IndexOutOfBoundsException("Empty array");
-        }
+    public int findMin(Array array) {
+        List<Integer> elements = array.getElements();
         int min = elements.get(0);
         for (int element : elements) {
             if (min > element) {
@@ -39,20 +29,22 @@ public class ArrayLogic {
         return min;
     }
 
-    public void doubleOddNumbers() {
-        ArrayList<Integer> elements = array.getElements();
-        if (elements.size() == 0) {
-            throw new IndexOutOfBoundsException("Empty array");
-        }
+    public Array doubleOddNumbers(Array array) {
+        List<Integer> elements = array.getElements();
+        Array newArray = new Array();
+        List<Integer> newArrayElements = newArray.getElements();
         for (int element : elements) {
-            if (element % 2 != 0) {
-                element *= 2;
+            if (element % 2 == 0) {
+                newArrayElements.add(element);
+            } else {
+                newArrayElements.add(element * 2);
             }
         }
+        return newArray;
     }
 
-    public int sumArray() {
-        ArrayList<Integer> elements = array.getElements();
+    public int sumArray(Array array) {
+        List<Integer> elements = array.getElements();
         if (elements.size() == 0) {
             throw new IndexOutOfBoundsException("Empty array");
         }
@@ -63,22 +55,14 @@ public class ArrayLogic {
         return sum;
     }
 
-    public String getAverageNumber() {
-        ArrayList<Integer> elements = array.getElements();
-        if (elements.size() == 0) {
-            throw new IndexOutOfBoundsException("Empty array");
-        }
-        double sum = sumArray();
-        Double averageNumber = sum / elements.size();
-        String formatOfAverageNumber = String.format("%.2f",averageNumber);
-        return formatOfAverageNumber;
+    public int getAverageNumber(Array array) {
+        List<Integer> elements = array.getElements();
+        int sum = sumArray(array);
+        return sum / elements.size();
     }
 
-    public int countPositiveNumbers() {
-        ArrayList<Integer> elements = array.getElements();
-        if (elements.size() == 0) {
-            throw new IndexOutOfBoundsException("Empty array");
-        }
+    public int countPositiveNumbers(Array array) {
+        List<Integer> elements = array.getElements();
         int count = 0;
         for (int element : elements) {
             if (element > 0) {
@@ -88,11 +72,8 @@ public class ArrayLogic {
         return count;
     }
 
-    public int countNegativeNumbers() {
-        ArrayList<Integer> elements = array.getElements();
-        if (elements.size() == 0) {
-            throw new IndexOutOfBoundsException("Empty array");
-        }
+    public int countNegativeNumbers(Array array) {
+        List<Integer> elements = array.getElements();
         int count = 0;
         for (int element : elements) {
             if (element < 0) {
@@ -102,11 +83,5 @@ public class ArrayLogic {
         return count;
     }
 
-    public Array getArray() {
-        return array;
-    }
 
-    public void setArray(Array array) {
-        this.array = array;
-    }
 }

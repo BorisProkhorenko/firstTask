@@ -4,18 +4,20 @@ import com.epam.task.first.entity.Array;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ArrayLogicTest {
+
+    private Array array;
+    private ArrayLogic arrayLogic = new ArrayLogic();
 
     @Test
     public void testFindMaxWhenPositiveNumbersApplied() {
         //given
-        Array array = new Array(1, 2, 3, 8, 5, 6);
-        ArrayLogic arrayLogic = new ArrayLogic(array);
+        array = new Array(1, 2, 3, 8, 5, 6);
 
         //when
-        int actual = arrayLogic.findMax();
+        int actual = arrayLogic.findMax(array);
 
         //then
         Assert.assertEquals(8, actual);
@@ -24,11 +26,10 @@ public class ArrayLogicTest {
     @Test
     public void testFindMaxWhenNegativeNumbersApplied() {
         //given
-        Array array = new Array(-1, -2, -3, -8, -5, -6);
-        ArrayLogic arrayLogic = new ArrayLogic(array);
+        array = new Array(-1, -2, -3, -8, -5, -6);
 
         //when
-        int actual = arrayLogic.findMax();
+        int actual = arrayLogic.findMax(array);
 
         //then
         Assert.assertEquals(-1, actual);
@@ -37,43 +38,22 @@ public class ArrayLogicTest {
     @Test
     public void testFindMaxWhenPositiveAndNegativeNumbersApplied() {
         //given
-        Array array = new Array(-1, 0, 3, -8, 5, -6);
-        ArrayLogic arrayLogic = new ArrayLogic(array);
+        array = new Array(-1, 0, 3, -8, 5, -6);
 
         //when
-        int actual = arrayLogic.findMax();
+        int actual = arrayLogic.findMax(array);
 
         //then
         Assert.assertEquals(5, actual);
     }
 
     @Test
-    public void testFindMaxWhenNoNumbersApplied() {
-        //given
-        Array array = new Array();
-        ArrayLogic arrayLogic = new ArrayLogic(array);
-        boolean isException = false;
-
-        //when
-        try {
-            int actual = arrayLogic.findMax();
-        } catch (IndexOutOfBoundsException ex) {
-            isException = true;
-        }
-
-
-        //then
-        Assert.assertTrue(isException);
-    }
-
-    @Test
     public void testFindMinWhenPositiveNumbersApplied() {
         //given
-        Array array = new Array(5, 2, 3, 8, 1, 6);
-        ArrayLogic arrayLogic = new ArrayLogic(array);
+        array = new Array(5, 2, 3, 8, 1, 6);
 
         //when
-        int actual = arrayLogic.findMin();
+        int actual = arrayLogic.findMin(array);
 
         //then
         Assert.assertEquals(1, actual);
@@ -82,11 +62,10 @@ public class ArrayLogicTest {
     @Test
     public void testFindMinWhenNegativeNumbersApplied() {
         //given
-        Array array = new Array(-1, -2, -3, -8, -5, -6);
-        ArrayLogic arrayLogic = new ArrayLogic(array);
+        array = new Array(-1, -2, -3, -8, -5, -6);
 
         //when
-        int actual = arrayLogic.findMin();
+        int actual = arrayLogic.findMin(array);
 
         //then
         Assert.assertEquals(-8, actual);
@@ -95,114 +74,52 @@ public class ArrayLogicTest {
     @Test
     public void testFindMinWhenPositiveAndNegativeNumbersApplied() {
         //given
-        Array array = new Array(-1, 0, 3, -8, 5, -6);
-        ArrayLogic arrayLogic = new ArrayLogic(array);
+        array = new Array(-1, 0, 3, -8, 5, -6);
+
 
         //when
-        int actual = arrayLogic.findMin();
+        int actual = arrayLogic.findMin(array);
 
         //then
         Assert.assertEquals(-8, actual);
     }
 
     @Test
-    public void testFindMinWhenNoNumbersApplied() {
-        //given
-        Array array = new Array();
-        ArrayLogic arrayLogic = new ArrayLogic(array);
-        boolean isException = false;
-
-        //when
-        try {
-            int actual = arrayLogic.findMin();
-        } catch (IndexOutOfBoundsException ex) {
-            isException = true;
-        }
-
-        //then
-        Assert.assertTrue(isException);
-    }
-
-    @Test
     public void testDoubleOddNumbersWhenPositiveNumbersApplied() {
         //given
-        Array array = new Array(5, 2, 3, 8, 0, 7);
-        ArrayLogic arrayLogic = new ArrayLogic(array);
-        ArrayList<Integer> elements = array.getElements();
-        boolean isDoubled = true;
+        array = new Array(5, 2, 3, 8, 1, 7);
+        Array testArray = new Array(10, 2, 6, 8, 2, 14);
 
         //when
-        arrayLogic.doubleOddNumbers();
+        Array actualArray = arrayLogic.doubleOddNumbers(array);
 
         //then
-        ArrayList<Integer> changedElements = array.getElements();
-        for (int element : elements) {
-            if (element % 2 != 0) {
-                int index = elements.indexOf(element);
-                int elementFromChangedArray = changedElements.get(index);
-                if (element * 2 != elementFromChangedArray) {
-                    isDoubled = false;
-                    break;
-                }
-            }
-        }
 
-        Assert.assertFalse(isDoubled);
+        Assert.assertTrue(testArray.equals(actualArray));
     }
 
     @Test
     public void testDoubleOddNumbersWhenNegativeNumbersApplied() {
         //given
-        Array array = new Array(-5, -2, -3, -8, -1, -7);
-        ArrayLogic arrayLogic = new ArrayLogic(array);
-        ArrayList<Integer> elements = array.getElements();
-        boolean isDoubled = true;
+        array = new Array(-5, -2, -3, -8, -1, -7);
+        Array testArray = new Array(-10, -2, -6, -8, -2, -14);
 
         //when
-        arrayLogic.doubleOddNumbers();
+        Array actualArray = arrayLogic.doubleOddNumbers(array);
 
         //then
-        ArrayList<Integer> changedElements = array.getElements();
-        for (int element : elements) {
-            if (element % 2 != 0) {
-                int index = elements.indexOf(element);
-                int elementFromChangedArray = changedElements.get(index);
-                if (element * 2 != elementFromChangedArray) {
-                    isDoubled = false;
-                    break;
-                }
-            }
-        }
 
-        Assert.assertFalse(isDoubled);
-    }
+        Assert.assertTrue(testArray.equals(actualArray));
+}
 
-    @Test
-    public void testDoubleOddNumbersWhenNoNumbersApplied() {
-        //given
-        Array array = new Array();
-        ArrayLogic arrayLogic = new ArrayLogic(array);
-        boolean isException = false;
-
-        //when
-        try {
-            arrayLogic.doubleOddNumbers();
-        } catch (IndexOutOfBoundsException ex) {
-            isException = true;
-        }
-
-        //then
-        Assert.assertTrue(isException);
-    }
 
     @Test
     public void testSumArrayWhenPositiveNumbersApplied() {
         //given
-        Array array = new Array(5, 2, 3, 8, 1, 7);
-        ArrayLogic arrayLogic = new ArrayLogic(array);
+        array = new Array(5, 2, 3, 8, 1, 7);
 
         //when
-        int sum = arrayLogic.sumArray();
+        int sum = arrayLogic.sumArray(array);
 
         //then
         Assert.assertEquals(26, sum);
@@ -212,11 +129,10 @@ public class ArrayLogicTest {
     @Test
     public void testSumArrayWhenNegativeNumbersApplied() {
         //given
-        Array array = new Array(-5, -2, -3, -8, -1, -7);
-        ArrayLogic arrayLogic = new ArrayLogic(array);
+        array = new Array(-5, -2, -3, -8, -1, -7);
 
         //when
-        int sum = arrayLogic.sumArray();
+        int sum = arrayLogic.sumArray(array);
 
         //then
         Assert.assertEquals(-26, sum);
@@ -226,11 +142,10 @@ public class ArrayLogicTest {
     @Test
     public void testSumArrayWhenPositiveAndNegativeNumbersApplied() {
         //given
-        Array array = new Array(5, -2, 3, -8, 1, -7);
-        ArrayLogic arrayLogic = new ArrayLogic(array);
+        array = new Array(5, -2, 3, -8, 1, -7);
 
         //when
-        int sum = arrayLogic.sumArray();
+        int sum = arrayLogic.sumArray(array);
 
         //then
         Assert.assertEquals(-8, sum);
@@ -238,91 +153,54 @@ public class ArrayLogicTest {
     }
 
     @Test
-    public void testSumArrayWhenWhenNoNumbersApplied() {
-        //given
-        Array array = new Array();
-        ArrayLogic arrayLogic = new ArrayLogic(array);
-        boolean isException = false;
-
-        //when
-        try {
-            int sum = arrayLogic.sumArray();
-        } catch (IndexOutOfBoundsException ex) {
-            isException = true;
-        }
-
-        //then
-        Assert.assertTrue(isException);
-    }
-
-    @Test
     public void testGetAverageNumberWhenPositiveNumbersApplied() {
         //given
-        Array array = new Array(5, 2, 3, 8, 1, 7);
-        ArrayLogic arrayLogic = new ArrayLogic(array);
+        array = new Array(5, 2, 3, 8, 1, 7);
 
         //when
-        String actual = arrayLogic.getAverageNumber();
+        int actual = arrayLogic.getAverageNumber(array);
 
         //then
-        Assert.assertEquals("4,33", actual);
+        Assert.assertEquals(4, actual);
 
     }
 
     @Test
     public void testGetAverageNumberWhenNegativeNumbersApplied() {
         //given
-        Array array = new Array(-5, -2, -3, -8, -1, -7);
-        ArrayLogic arrayLogic = new ArrayLogic(array);
+        array = new Array(-5, -2, -3, -8, -1, -7);
+
 
         //when
-        String actual = arrayLogic.getAverageNumber();
+        int actual = arrayLogic.getAverageNumber(array);
 
         //then
-        Assert.assertEquals("-4,33", actual);
+        Assert.assertEquals(-4, actual);
 
     }
 
     @Test
     public void testGetAverageNumberWhenPositiveAndNegativeNumbersApplied() {
         //given
-        Array array = new Array(5, -2, 3, -8, 1, -7);
-        ArrayLogic arrayLogic = new ArrayLogic(array);
+        array = new Array(5, -2, 3, -8, 1, -7);
+
 
         //when
-        String actual = arrayLogic.getAverageNumber();
+        int actual = arrayLogic.getAverageNumber(array);
 
         //then
-        Assert.assertEquals("-1,33", actual);
+        Assert.assertEquals(-1, actual);
 
-    }
-
-    @Test
-    public void testGetAverageNumberWhenWhenNoNumbersApplied() {
-        //given
-        Array array = new Array();
-        ArrayLogic arrayLogic = new ArrayLogic(array);
-        boolean isException = false;
-
-        //when
-        try {
-            String actual = arrayLogic.getAverageNumber();
-        } catch (IndexOutOfBoundsException ex) {
-            isException = true;
-        }
-
-        //then
-        Assert.assertTrue(isException);
     }
 
     @Test
     public void testCountPositiveNumbersWhenPositiveAndNegativeNumbersApplied() {
         //given
-        Array array = new Array(5, -2, 3, -8, 1, -7, 0);
-        ArrayLogic arrayLogic = new ArrayLogic(array);
+        array = new Array(5, -2, 3, -8, 1, -7, 0);
+
 
         //when
-        int count = arrayLogic.countPositiveNumbers();
+        int count = arrayLogic.countPositiveNumbers(array);
 
         //then
         Assert.assertEquals(3, count);
@@ -332,11 +210,11 @@ public class ArrayLogicTest {
     @Test
     public void testCountNegativeNumbersWhenPositiveAndNegativeNumbersApplied() {
         //given
-        Array array = new Array(5, -2, 3, -8, 1, -7, 0);
-        ArrayLogic arrayLogic = new ArrayLogic(array);
+        array = new Array(5, -2, 3, -8, 1, -7, 0);
+
 
         //when
-        int count = arrayLogic.countNegativeNumbers();
+        int count = arrayLogic.countNegativeNumbers(array);
 
         //then
         Assert.assertEquals(3, count);
@@ -345,42 +223,30 @@ public class ArrayLogicTest {
 
     @Test
     public void testCountPositiveNumbersWhenWhenNoNumbersApplied() {
+
         //given
-        Array array = new Array();
-        ArrayLogic arrayLogic = new ArrayLogic(array);
-        boolean isException = false;
+        array = new Array();
 
         //when
-        try {
-            int count = arrayLogic.countPositiveNumbers();
-        } catch (IndexOutOfBoundsException ex) {
-            isException = true;
-        }
+
+        int count = arrayLogic.countPositiveNumbers(array);
 
         //then
-        Assert.assertTrue(isException);
+        Assert.assertEquals(0, count);
     }
 
     @Test
     public void testCountNegativeNumbersWhenWhenNoNumbersApplied() {
+
         //given
-        Array array = new Array();
-        ArrayLogic arrayLogic = new ArrayLogic(array);
-        boolean isException = false;
+        array = new Array();
 
         //when
-        try {
-            int count = arrayLogic.countNegativeNumbers();
-        } catch (IndexOutOfBoundsException ex) {
-            isException = true;
-        }
+
+        int count = arrayLogic.countNegativeNumbers(array);
 
         //then
-        Assert.assertTrue(isException);
+        Assert.assertEquals(0, count);
     }
 
-    /*
-    PS. Я понимаю, что NoNumbers тесты здесь скорее всего не нужны(выглядят они по меньшей мере немного нелепо),
-    но я пишу тесты первый раз и решил перестраховаться.
-     */
 }
