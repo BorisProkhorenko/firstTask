@@ -4,7 +4,7 @@ import com.epam.task.first.entity.Array;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.List;
+
 
 public class ArrayLogicTest {
 
